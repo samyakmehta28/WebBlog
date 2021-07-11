@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+{% block title %} 
+Add New Blog 
+{% endblock %}
+
+{% block content %} 
+
+{% if user.is_authenticated %}
+
+<h1>Add New Blog</h1>
+<br/>
+<div class = "form-group">
+    <form method="POST">
+         {% csrf_token %} 
+         {{ form.as_p}} <!--django form system .. enlists all fields present in modelPost(mentioned in class AddBlogView that links to this html) -->
+         <button class="btn btn-success">Add</button>
+    </form>
+</div>
+{% else %} 
+<br/>
+<br/>
+ <p><b>Login first in order to have access to this page</b></p>
+{% endif %}
+
+{% endblock %}
