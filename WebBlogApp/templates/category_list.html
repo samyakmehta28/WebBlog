@@ -1,0 +1,18 @@
+{% extends 'base.html' %} 
+
+{% block title %} 
+BlogPost | {{post.title_tag}} 
+{% endblock %}
+
+
+{% block content %} 
+
+<h1 style="text-decoration: underline">Categories:</h1>
+<br/>
+<ul>
+{% for item in cat_list %}
+<li><h4><a href="{% url 'category' item %}" style="text-decoration: none;">{{item}}</a></h4></li>
+{% endfor %}
+</ul>
+
+{% endblock %} 
