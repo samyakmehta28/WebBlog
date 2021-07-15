@@ -6,24 +6,28 @@ Delete Blog
 {% block content %} 
 
 {% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
 
-<!--<h1>Delete Blog</h1>-->
-<br/>
-<h4>Delete: {{post.title }}</h4>
-<br/>
-<div class = "form-group">
-    <form method="POST">
-         {% csrf_token %} 
-         <h5>Are you sure you want to delete this blog?</h5><br/>
-         <button class="btn btn-danger">Delete</button> 
-         <a href="{% url 'home' %}" class="btn btn-dark">Back</a>
-    </form>
-</div>
+        <!--<h1>Delete Blog</h1>-->
+        <br/>
+        <h4>Delete: {{post.title }}</h4>
+        <br/>
+        <div class = "form-group">
+            <form method="POST">
+                {% csrf_token %} 
+                <h5>Are you sure you want to delete this blog?</h5><br/>
+                <button class="btn btn-danger">Delete</button> 
+                <a href="{% url 'home' %}" class="btn btn-dark">Back</a>
+            </form>
+        </div>
+    {% else %}
+    <br/>
+    <p><b>You cannot delete a blog you did not create!</b></p>
+    {% endif %}
 
 {% else %} 
 <br/>
-<br/>
- <p><b>Login first in order to have access to this page</b></p>
+<p><b>Login first in order to have access to this page</b></p>
 {% endif %}
 
 {% endblock %}

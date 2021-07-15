@@ -15,7 +15,7 @@ class AddBlogForm(forms.ModelForm):
         widgets = {
             'title' : forms.TextInput(attrs={'class': 'form-control','placeholder':'Enter your blog title'}),
             'title_tag' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter a title tag for your blog '}),
-            'author' : forms.Select(attrs={'class': 'form-control'}),
+            'author' : forms.TextInput(attrs={'class': 'form-control', 'value': '', 'id': 'user_name', 'type':'hidden'}),
             'category' : forms.Select(choices=choice_list, attrs={'class': 'form-control'}),
             'body' : forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter the content of your blog here'})
         }

@@ -8,11 +8,15 @@ BlogPost | {{post.title_tag}}
 {% block content %} 
 
 <h1>{{post.title}}</h1>
+
 <small>By : {{post.author.first_name}} {{post.author.last_name}} - {{ post.date }} <br/>
     {% if user.is_authenticated %}  
+      {% if user.id == post.author.id %}
     <a href = "{% url 'edit_blog' post.pk %}">Edit</a>  |  
     <a href = "{% url 'delete_blog' post.pk %}">Delete</a><br/></small>
-     {% endif %}
+    {% endif %} 
+    {% endif %}
+   <small><p>Likes : {{total_likes}}</p></small>
 <hr>
 <br/>
 {{ post.body|safe }}
@@ -21,5 +25,18 @@ BlogPost | {{post.title_tag}}
 <br/>
 
 <a href="{% url 'home' %}" class="btn btn-dark">Back</a>
+<br/>
+<hr>
+<br/>
+<form action="{% url 'like_blog' post.pk %}" method = "POST">
+    {% csrf_token %}
+    {% if user.is_authenticated %} 
+        {% if liked %}
+          <button type="submit", name="blog_id", value="{{post.id}}", class="btn btn-danger">UnLike</button>
 
+        {% else %}
+        <button type="submit", name="blog_id", value="{{post.id}}", class="btn btn-success">Like</button>
+        {% endif %}
+    {% endif %}
+</form>
 {% endblock %} 

@@ -12,10 +12,16 @@ Add New Blog
 <div class = "form-group">
     <form method="POST">
          {% csrf_token %} 
+         {{ form.media}}
          {{ form.as_p}} <!--django form system .. enlists all fields present in modelPost(mentioned in class AddBlogView that links to this html) -->
          <button class="btn btn-success">Add</button>
     </form>
 </div>
+
+<script>
+    var name = "{{ user.id }}";
+    document.getElementById("user_name").value = name;
+</script>
 {% else %} 
 <br/>
 <br/>
